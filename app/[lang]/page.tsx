@@ -1,4 +1,5 @@
 import { Hero } from '@/components/Hero/Hero'
+import { Manifesto } from '@/components/Manifesto/Manifesto'
 import { ProjectsViews } from '@/components/Projects/ProjectsViews'
 import { getProjects, toCard } from '@/lib/content/projects'
 import { getSite } from '@/lib/content/site'
@@ -14,6 +15,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
     <>
       <Hero name={site.name} />
       <ProjectsViews items={cards} lang={lang} />
+      <Manifesto tokens={site.manifesto[lang]} lang={lang} />
     </>
   )
 }

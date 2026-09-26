@@ -1,0 +1,17 @@
+.manifesto { padding: 160px var(--gutter) 0; }
+.text {
+  font-size: clamp(36px, 7vw, 120px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+}
+.word { display: inline-block; }
+.inlineImg {
+  display: inline-block;
+  height: 0.8em;
+  width: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.12em;
+  vertical-align: -0.06em;
+}
