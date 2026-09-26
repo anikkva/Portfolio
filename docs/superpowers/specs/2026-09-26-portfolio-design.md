@@ -39,17 +39,19 @@
 
 ```
 content/
-  site.json                  имя, манифест (ru/en), контакты, соцсети
+  site.json                  имя, роль, email, соцсети, манифест (ru/en)
   projects/<slug>/
     index.ru.mdx
     index.en.mdx
-    cover.(jpg|png|mp4)
-    ...медиа
   playground/<id>.json       { media, caption: {ru,en}, year }
-  about.ru.mdx / about.en.mdx
-  cv.ru.mdx / cv.en.mdx
-public/cv/anikkva-cv.pdf
+  about.ru.mdx / about.en.mdx   frontmatter: title, photo, skills, clients
+  cv.ru.mdx / cv.en.mdx         frontmatter: title, pdf, experience, education
+public/
+  work/<slug>/cover.(jpg|png|svg|mp4), 01.jpg …   медиа проектов (Next раздаёт только public/)
+  playground/, manifesto/, about/
+  cv/anikkva-cv.pdf
 ```
+Пути к медиа в контенте — абсолютные от `public/` (например `/work/<slug>/cover.jpg`); формат совместим с Keystatic (`image({ directory: 'public/work', publicPath: '/work' })`).
 
 Frontmatter проекта (схема zod; неверные данные → ошибка сборки с понятным сообщением):
 
