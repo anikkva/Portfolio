@@ -1,0 +1,32 @@
+.head { display: grid; gap: 16px; margin-bottom: 32px; }
+.title {
+  font-size: clamp(40px, 7vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  max-width: 16ch;
+}
+.passport { color: var(--muted); }
+.cover { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--plate); }
+
+.body { display: grid; gap: 48px; margin-top: 64px; }
+@media (min-width: 1024px) {
+  .body { grid-template-columns: 220px minmax(0, 1fr); }
+  .toc { position: sticky; top: calc(var(--header-h) + 24px); align-self: start; }
+  .wide { grid-column: 1 / -1; }
+}
+.toc ol { display: grid; gap: 8px; margin-top: 12px; }
+.toc a { font-size: 14px; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+
+.next {
+  display: grid;
+  gap: 16px;
+  margin-top: 120px;
+  padding-top: 32px;
+  border-top: 1px solid var(--ink);
+  color: inherit;
+  text-decoration: none;
+}
+.nextTitle { font-size: clamp(32px, 6vw, 96px); line-height: 1; }
+.nextCover { width: min(480px, 100%); aspect-ratio: 4 / 3; object-fit: cover; }
