@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { InkReveal } from '@/components/ink/InkReveal'
+import { InkText } from '@/components/ink/InkText'
 import { getAbout } from '@/lib/content/pages'
 import { asLocale, t } from '@/lib/i18n'
 import { Mdx } from '@/lib/mdx'
@@ -15,10 +17,14 @@ export default async function AboutPage({ params }: Params) {
   const about = getAbout(lang)
   return (
     <article className="page">
-      <h1 className="page-title">{about.title}</h1>
+      <InkText as="h1" className="page-title">
+        {about.title}
+      </InkText>
       <div className={s.layout}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={about.photo} alt="" className={s.photo} />
+        <InkReveal>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={about.photo} alt="" className={s.photo} />
+        </InkReveal>
         <div>
           <div className="prose">
             <Mdx source={about.body} />

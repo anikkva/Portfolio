@@ -4,6 +4,7 @@ import { ViewTransition } from 'react'
 import { NextProject } from '@/components/Case/NextProject'
 import { Passport } from '@/components/Case/Passport'
 import s from '@/components/Case/Case.module.css'
+import { InkText } from '@/components/ink/InkText'
 import { Media } from '@/components/Media/Media'
 import { getNextProject, getProject, getProjects } from '@/lib/content/projects'
 import { asLocale, t } from '@/lib/i18n'
@@ -38,7 +39,9 @@ export default async function WorkPage({ params }: Params) {
   return (
     <article className="page">
       <header className={s.head}>
-        <h1 className={s.title}>{project.title}</h1>
+        <InkText as="h1" className={s.title} hover={false}>
+          {project.title}
+        </InkText>
         <Passport project={project} />
       </header>
 

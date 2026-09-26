@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react'
+import { InkReveal } from '@/components/ink/InkReveal'
 import { Media } from '@/components/Media/Media'
 import { BeforeAfter } from './BeforeAfter'
 import s from './mdx.module.css'
@@ -8,7 +9,9 @@ type FigureProps = { src: string; alt?: string; caption?: string; poster?: strin
 function Figure({ src, alt = '', caption, poster, full = false }: FigureProps) {
   return (
     <figure className={full ? s.full : s.figure}>
-      <Media src={src} alt={alt} poster={poster} className={s.media} />
+      <InkReveal>
+        <Media src={src} alt={alt} poster={poster} className={s.media} />
+      </InkReveal>
       {caption && <figcaption className={`ui ${s.caption}`}>{caption}</figcaption>}
     </figure>
   )

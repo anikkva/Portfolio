@@ -1,10 +1,11 @@
 'use client'
 
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { motion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import Link from 'next/link'
 import { Fragment, useRef, type ReactNode } from 'react'
 import type { ManifestoToken } from '@/lib/content/schema'
 import { t, type Locale } from '@/lib/i18n'
+import { useMotionAllowed } from '@/lib/useMotionAllowed'
 import s from './Manifesto.module.css'
 
 type Piece = { kind: 'word'; text: string } | { kind: 'img'; src: string } | { kind: 'sym'; text: string }
@@ -19,10 +20,10 @@ function toPieces(tokens: ManifestoToken[]): Piece[] {
 }
 
 function Word({ progress, range, children }: { progress: MotionValue<number>; range: [number, number]; children: ReactNode }) {
-  const reduced = useReducedMotion()
+  const allowed = useMotionAllowed()
   const opacity = useTransform(progress, range, [0.12, 1])
   return (
-    <motion.span className={s.word} style={{ opacity: reduced ? 1 : opacity }}>
+    <motion.span className={s.word} style={{ opacity: allowed ? opacity : 1 }}>
       {children}
     </motion.span>
   )

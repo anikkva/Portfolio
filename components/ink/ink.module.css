@@ -1,0 +1,26 @@
+.reveal { position: relative; }
+.inner {
+  -webkit-mask-image: radial-gradient(circle at 35% 45%, #000 calc(var(--ink-r, 0%) - 20%), transparent var(--ink-r, 0%));
+  mask-image: radial-gradient(circle at 35% 45%, #000 calc(var(--ink-r, 0%) - 20%), transparent var(--ink-r, 0%));
+}
+.done .inner { -webkit-mask-image: none; mask-image: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { filter: none !important; }
+  .inner { -webkit-mask-image: none; mask-image: none; }
+}
+
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--bg);
+  translate: -50% -50%;
+  pointer-events: none;
+}
+.cursorLabel { transition: opacity 0.15s; }

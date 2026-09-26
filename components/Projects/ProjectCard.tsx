@@ -1,11 +1,13 @@
 'use client'
 
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import { motion, useScroll, useTransform } from 'motion/react'
 import Link from 'next/link'
 import { useRef, ViewTransition, type CSSProperties, type ReactNode } from 'react'
+import { InkReveal } from '@/components/ink/InkReveal'
 import { Media } from '@/components/Media/Media'
 import type { CardData } from '@/lib/content/projects'
 import { cx } from '@/lib/cx'
+import { useMotionAllowed } from '@/lib/useMotionAllowed'
 import s from './Projects.module.css'
 
 type Props = {
@@ -21,11 +23,11 @@ const SPRING = { type: 'spring', stiffness: 170, damping: 26 } as const
 
 function Drift({ speed, children }: { speed: number; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null)
-  const reduced = useReducedMotion()
+  const allowed = useMotionAllowed()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], [speed * 400, speed * -400])
   return (
-    <motion.div ref={ref} style={{ y: reduced || speed === 0 ? 0 : y }}>
+    <motion.div ref={ref} style={{ y: allowed && speed !== 0 ? y : 0 }}>
       {children}
     </motion.div>
   )
@@ -34,9 +36,11 @@ function Drift({ speed, children }: { speed: number; children: ReactNode }) {
 export function ProjectCard({ item, ratio, speed = 0, className, style, children }: Props) {
   const inner = (
     <>
-      <ViewTransition name={`cover-${item.slug}`}>
-        <Media src={item.cover} alt="" className={s.cover} style={{ aspectRatio: ratio }} />
-      </ViewTransition>
+      <InkReveal revealKey={item.slug}>
+        <ViewTransition name={`cover-${item.slug}`}>
+          <Media src={item.cover} alt="" className={s.cover} style={{ aspectRatio: ratio }} />
+        </ViewTransition>
+      </InkReveal>
       <span className={`ui ${s.hoverTitle}`}>
         {item.title}
         {item.external ? ' ↗' : ''}

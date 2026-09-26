@@ -109,3 +109,10 @@ ul, ol { list-style: none; }
   ::view-transition-old(*),
   ::view-transition-new(*) { animation: none !important; }
 }
+
+html.ink-cursor,
+html.ink-cursor * { cursor: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ink] { filter: none !important; }
+}
