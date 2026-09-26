@@ -1,0 +1,6 @@
+font-lab/.venv/
+font-lab/sources/
+font-lab/build/
+__pycache__/
+.pytest_cache/
+.DS_Store
