@@ -1,0 +1,32 @@
+.figure, .full { margin: 48px 0; }
+.full { max-width: none; }
+.media { width: 100%; height: auto; background: var(--plate); }
+.caption { margin-top: 10px; color: var(--muted); }
+
+.grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 48px 0; }
+.grid .figure { margin: 0; }
+@media (min-width: 768px) {
+  .grid { grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr)); }
+}
+
+.quote {
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.2;
+  border-left: 3px solid var(--ink);
+  padding-left: 24px;
+  margin: 48px 0;
+}
+.cite { display: block; margin-top: 16px; font-style: normal; color: var(--muted); }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; margin: 48px 0; }
+.statValue { font-size: clamp(40px, 6vw, 80px); line-height: 1; font-weight: 700; }
+.statLabel { margin-top: 8px; color: var(--muted); }
+
+.ba { position: relative; margin: 48px 0; overflow: hidden; background: var(--plate); }
+.baImg { width: 100%; height: auto; }
+.baTop { position: absolute; inset: 0; height: 100%; object-fit: cover; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.baLine { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--bg); pointer-events: none; }
+.baRange { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; }
+.baLabel { position: absolute; top: 12px; padding: 6px 10px; border-radius: 999px; background: var(--bg); pointer-events: none; }
+.baLeft { left: 12px; }
+.baRight { right: 12px; }
