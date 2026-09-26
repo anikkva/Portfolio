@@ -1,0 +1,8 @@
+.layout { display: grid; gap: 40px; }
+@media (min-width: 900px) { .layout { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; } }
+.photo { width: 100%; max-width: 520px; aspect-ratio: 3 / 4; object-fit: cover; background: var(--plate); }
+.block { margin-top: 48px; }
+.label { color: var(--muted); margin-bottom: 12px; font-weight: 400; }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pills :global(.pill--ghost) { border: 1px solid var(--ink); }
+.clients { font-size: clamp(24px, 3vw, 40px); line-height: 1.2; }

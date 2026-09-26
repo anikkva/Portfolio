@@ -1,0 +1,8 @@
+.intro { display: grid; gap: 24px; align-items: start; justify-items: start; }
+@media (min-width: 900px) { .intro { grid-template-columns: minmax(0, 1fr) auto; } }
+.section { margin-top: 72px; }
+.label { color: var(--muted); margin-bottom: 12px; font-weight: 400; }
+.rows { border-top: 1px solid var(--ink); }
+.row { display: grid; grid-template-columns: 1fr; gap: 4px 16px; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 18px; }
+@media (min-width: 768px) { .row { grid-template-columns: 180px 1fr 1fr; } }
+.muted { color: var(--muted); }
