@@ -1,0 +1,15 @@
+.hero { padding: var(--header-h) var(--gutter) 0; }
+.plate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: min(calc(100svh - var(--header-h) - var(--gutter)), 70vw);
+  background: var(--plate);
+  overflow: hidden;
+}
+.title {
+  font-size: calc((100vw - 2 * var(--gutter)) / 4.6);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
