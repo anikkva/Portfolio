@@ -1,0 +1,7 @@
+{
+  "name": "TEST",
+  "role": { "ru": "Дизайнер", "en": "Designer" },
+  "email": "test@example.com",
+  "socials": [{ "label": "Telegram", "url": "https://t.me/test" }],
+  "manifesto": { "ru": ["Привет", { "sym": "∴" }], "en": ["Hello", { "img": "/manifesto/01.svg" }] }
+}
