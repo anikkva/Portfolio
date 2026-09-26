@@ -1,0 +1,68 @@
+{
+  "name": "ANIKKVA",
+  "role": {
+    "ru": "Продуктовый дизайнер",
+    "en": "Product designer"
+  },
+  "email": "hello@anikkva.com",
+  "socials": [
+    {
+      "label": "Telegram",
+      "url": "https://t.me/"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/"
+    },
+    {
+      "label": "Behance",
+      "url": "https://www.behance.net/"
+    }
+  ],
+  "manifesto": {
+    "ru": [
+      "Я проектирую",
+      {
+        "sym": "∴"
+      },
+      "продукты, которые",
+      {
+        "img": "/manifesto/01.svg"
+      },
+      "понятны людям",
+      {
+        "sym": "⊗"
+      },
+      "и полезны бизнесу. Исследую, упрощаю",
+      {
+        "img": "/manifesto/02.svg"
+      },
+      "и довожу до релиза",
+      {
+        "sym": "⇦"
+      }
+    ],
+    "en": [
+      "I design",
+      {
+        "sym": "∴"
+      },
+      "products that",
+      {
+        "img": "/manifesto/01.svg"
+      },
+      "feel obvious to people",
+      {
+        "sym": "⊗"
+      },
+      "and work for business. I research, simplify",
+      {
+        "img": "/manifesto/02.svg"
+      },
+      "and ship",
+      {
+        "sym": "⇦"
+      }
+    ]
+  }
+}
