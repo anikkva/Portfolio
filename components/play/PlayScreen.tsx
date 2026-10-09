@@ -6,6 +6,7 @@ import { useMotionAllowed } from '@/lib/useMotionAllowed'
 import type { PlayScreenName } from '@/lib/playScreens'
 import { TrainSearch } from './screens/train/TrainSearch'
 import { TrainSeat } from './screens/train/TrainSeat'
+import { TrainTicket } from './screens/train/TrainTicket'
 import { WeatherDial } from './screens/weather/WeatherDial'
 import { WeatherList } from './screens/weather/WeatherList'
 import s from './PlayScreen.module.css'
@@ -17,6 +18,7 @@ const SCREENS: Record<PlayScreenName, ComponentType<ScreenProps>> = {
   'weather-dial': WeatherDial,
   'train-search': TrainSearch,
   'train-seat': TrainSeat,
+  'train-ticket': TrainTicket,
 }
 
 /** Designed size of every Pragmatica screen. */

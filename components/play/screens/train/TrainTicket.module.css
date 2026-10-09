@@ -1,0 +1,112 @@
+/* Coordinates are the Figma frames' (393 × 852): "Your ticket" (front) and its back side. */
+.screen {
+  --ease: cubic-bezier(0.65, 0, 0.25, 1);
+  --duration: 0.9s;
+  position: relative;
+  width: 393px;
+  height: 852px;
+  overflow: hidden;
+  background: #0e0e10;
+  color: #fff;
+  font-family: var(--font-geist), system-ui, sans-serif;
+  line-height: normal;
+}
+.screen p { margin: 0; }
+.screen img { display: block; max-width: none; }
+
+/* The seat map from the previous step, out of focus behind the ticket. */
+.backdrop { position: absolute; inset: 0; filter: blur(12px); transition: filter var(--duration) var(--ease); }
+.flipped .backdrop { filter: blur(16px); }
+.dim { position: absolute; left: -7px; top: 0; width: 400px; height: 857px; background: rgba(0, 0, 0, 0.4); transition: opacity var(--duration) var(--ease); }
+.flipped .dim { opacity: 0; }
+
+.glow { position: absolute; left: -119px; width: 613px; height: 506.82px; mix-blend-mode: plus-lighter; pointer-events: none; transition: opacity var(--duration) var(--ease); }
+.glowBottom { top: 619px; }
+.glowTop { top: -305px; transform: scaleY(-1); }
+.flipped .glow { opacity: 0; }
+
+/* Front: the stamp image as placed in Figma (573 × 763.7, its top 23.3 px cropped).
+   Back: the same image mirrored and lifted, so the flip is one rotateX over the top. */
+.stage { position: absolute; inset: 0; perspective: 1400px; perspective-origin: 50% 0; }
+.stamp {
+  position: absolute;
+  left: -82px;
+  top: 74.7px;
+  width: 573px;
+  height: 763.7px;
+  clip-path: inset(23.3px 0 0 0);
+  transform-origin: 50% 50%;
+  transition: transform var(--duration) var(--ease);
+}
+.flipped .stamp { transform: translate(-8.5px, -472.1px) rotateX(180deg); }
+
+.front,
+.back { position: absolute; inset: 0; transition: opacity 0.4s ease, transform 0.6s var(--ease); }
+.front { transition-delay: 0s; }
+.flipped .front { opacity: 0; }
+.back { opacity: 0; transform: translateY(24px); pointer-events: none; }
+.flipped .back { opacity: 1; transform: none; transition-delay: 0.35s; }
+
+.title { position: absolute; left: 21px; top: 55px; font-size: 22px; font-weight: 600; white-space: nowrap; }
+.tag {
+  position: absolute;
+  left: 298px;
+  top: 59px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #ff6f00;
+  font: 400 10px/normal var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.badge {
+  position: absolute;
+  left: 182px;
+  top: 791px;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border: 2px solid #ff6f00;
+  border-radius: 20px;
+  font: 600 10px/normal var(--font-geist-mono), ui-monospace, monospace;
+}
+.badge img { position: absolute; left: -1px; top: -1px; }
+.badge span { position: absolute; left: 12px; top: 11.5px; }
+
+.details {
+  position: absolute;
+  left: 28px;
+  top: 334px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  width: 337px;
+  padding-bottom: 40px;
+  font-family: var(--font-dm-mono), ui-monospace, monospace;
+}
+.noise { display: flex; flex-direction: column; align-items: center; gap: 12px; color: #cf0; }
+.noiseLabel { display: flex; flex-direction: column; align-items: center; gap: 2px; color: #fff; font-size: 9px; letter-spacing: 0.36px; text-transform: uppercase; }
+.noiseScale { color: #737373; }
+.specs { display: flex; flex-direction: column; gap: 24px; width: 100%; }
+.spec { display: flex; justify-content: space-between; padding: 7px 0; white-space: nowrap; }
+.specRule { position: relative; }
+.specRule::before { content: ''; position: absolute; left: 0; right: 0; top: -12.5px; height: 1px; background: rgba(255, 255, 255, 0.15); }
+.specKey { font-size: 14px; letter-spacing: 0.56px; text-transform: uppercase; }
+.specValue { font-size: 16px; opacity: 0.4; }
+.select {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 353px;
+  height: 82px;
+  border-radius: 26px;
+  background: #fff;
+  color: #000;
+  font: 700 16px/normal var(--font-geist), system-ui, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop, .dim, .glow, .stamp, .front, .back { transition: none; }
+}

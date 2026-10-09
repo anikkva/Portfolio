@@ -6,6 +6,8 @@ import { cx } from '@/lib/cx'
 import numberDots from './numberDots.json'
 import s from './TrainSeat.module.css'
 
+export { s as seatMapStyles }
+
 const A = '/play/pragmatica/train'
 
 const LOUD = '255,107,74'
@@ -40,72 +42,83 @@ function SeatDot({ seat }: { seat: Seat | { n: number } }) {
   )
 }
 
+/** Status bar + carriage schematic; needs an ancestor with `seatMapStyles.screen` for its tokens. */
+export function SeatMapLayer() {
+  return (
+    <>
+      {/* eslint-disable @next/next/no-img-element -- static design assets exported from Figma */}
+    <StatusBar time="9:41" />
+
+    <div className={s.content}>
+      <div className={s.topNav}>
+        <span className={s.back}>
+          <img src={`${A}/icon-chevron-left.svg`} alt="" width={16} height={16} />
+        </span>
+        <p className={s.route}>Moscow → St Petersburg</p>
+        <p className={s.tag}>CAR 08 / 12</p>
+      </div>
+
+      <div className={s.header}>
+        <p className={s.title}>Choose your seat</p>
+        <p className={cx(s.tag, s.tagLarge)}>CB / LUX</p>
+      </div>
+
+      <div className={s.chips}>
+        <span className={cx(s.chip, s.chipActive)}>Noise</span>
+        <span className={s.chip}>Temp</span>
+        <span className={s.chip}>Outlets</span>
+        <span className={s.chip}>Neighbors</span>
+      </div>
+
+      <div className={s.legend}>
+        <span className={s.loud}>Loud</span>
+        <span className={s.legendBar} />
+        <span className={s.quiet}>Quiet</span>
+        <span className={s.scaleNote}>Scale: 0-100</span>
+      </div>
+
+      <div className={s.schematic}>
+        <div className={s.cols}>
+          <span>A1</span>
+          <span>A2</span>
+          <span>B1</span>
+          <span>B2</span>
+        </div>
+        <p className={s.direction}>
+          <img src={`${A}/icon-arrow-right.svg`} alt="" width={10} height={10} /> Direction of Travel
+        </p>
+        <div className={s.car}>
+          <p className={s.vestibule}>Vestibule</p>
+          {ROWS.map(({ row, seats }, i) => (
+            <div key={row} className={cx(s.row, i > 0 && s.rowRule)}>
+              <span className={s.rowNumber}>{row}</span>
+              <span className={s.pair}>
+                <SeatDot seat={seats[0]} />
+                <SeatDot seat={seats[1]} />
+              </span>
+              <span className={s.aisle} />
+              <span className={s.pair}>
+                <SeatDot seat={seats[2]} />
+                <SeatDot seat={seats[3]} />
+              </span>
+              <span className={s.rowNumber} />
+            </div>
+          ))}
+          <p className={s.boiler}>Boiler</p>
+        </div>
+      </div>
+    </div>
+      {/* eslint-enable @next/next/no-img-element */}
+    </>
+  )
+}
+
 /** Pragmatica · Traavel seat map — static, as designed. */
 export function TrainSeat() {
   return (
     <div className={cx(s.screen, geist.variable, geistMono.variable)}>
       {/* eslint-disable @next/next/no-img-element -- static design assets exported from Figma */}
-      <StatusBar time="9:41" />
-
-      <div className={s.content}>
-        <div className={s.topNav}>
-          <span className={s.back}>
-            <img src={`${A}/icon-chevron-left.svg`} alt="" width={16} height={16} />
-          </span>
-          <p className={s.route}>Moscow → St Petersburg</p>
-          <p className={s.tag}>CAR 08 / 12</p>
-        </div>
-
-        <div className={s.header}>
-          <p className={s.title}>Choose your seat</p>
-          <p className={cx(s.tag, s.tagLarge)}>CB / LUX</p>
-        </div>
-
-        <div className={s.chips}>
-          <span className={cx(s.chip, s.chipActive)}>Noise</span>
-          <span className={s.chip}>Temp</span>
-          <span className={s.chip}>Outlets</span>
-          <span className={s.chip}>Neighbors</span>
-        </div>
-
-        <div className={s.legend}>
-          <span className={s.loud}>Loud</span>
-          <span className={s.legendBar} />
-          <span className={s.quiet}>Quiet</span>
-          <span className={s.scaleNote}>Scale: 0-100</span>
-        </div>
-
-        <div className={s.schematic}>
-          <div className={s.cols}>
-            <span>A1</span>
-            <span>A2</span>
-            <span>B1</span>
-            <span>B2</span>
-          </div>
-          <p className={s.direction}>
-            <img src={`${A}/icon-arrow-right.svg`} alt="" width={10} height={10} /> Direction of Travel
-          </p>
-          <div className={s.car}>
-            <p className={s.vestibule}>Vestibule</p>
-            {ROWS.map(({ row, seats }, i) => (
-              <div key={row} className={cx(s.row, i > 0 && s.rowRule)}>
-                <span className={s.rowNumber}>{row}</span>
-                <span className={s.pair}>
-                  <SeatDot seat={seats[0]} />
-                  <SeatDot seat={seats[1]} />
-                </span>
-                <span className={s.aisle} />
-                <span className={s.pair}>
-                  <SeatDot seat={seats[2]} />
-                  <SeatDot seat={seats[3]} />
-                </span>
-                <span className={s.rowNumber} />
-              </div>
-            ))}
-            <p className={s.boiler}>Boiler</p>
-          </div>
-        </div>
-      </div>
+      <SeatMapLayer />
 
       <div className={s.card}>
         <img src={`${A}/card-glow.svg`} alt="" width={613} height={506.82} className={s.glow} />
