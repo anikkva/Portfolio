@@ -32,8 +32,8 @@
   letter-spacing: -6.5536px;
   white-space: nowrap;
 }
-/* Same distance from the digit as in Figma's −3, whatever the digit. */
-.snowflake { margin: 26.4px 0 0 -8px; }
+/* A small gap after the digit. */
+.snowflake { margin: 26.4px 0 0 22px; }
 
 .name { position: absolute; left: 20px; top: 438px; display: flex; flex-direction: column; gap: 6px; width: 243.495px; opacity: 0.2; }
 .nameTitle { font-size: 33.85px; line-height: normal; letter-spacing: -1.1848px; }
