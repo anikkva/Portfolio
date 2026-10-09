@@ -113,6 +113,11 @@ ul, ol { list-style: none; }
 html.ink-cursor,
 html.ink-cursor * { cursor: none !important; }
 
+/* A modal <dialog> sits in the top layer, above the ink cursor — bring the native cursor back inside it. */
+html.ink-cursor dialog[open],
+html.ink-cursor dialog[open] * { cursor: auto !important; }
+html.ink-cursor dialog[open] :is(button, a) { cursor: pointer !important; }
+
 @media (prefers-reduced-motion: reduce) {
   [data-ink] { filter: none !important; }
 }
