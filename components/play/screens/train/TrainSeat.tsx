@@ -1,7 +1,6 @@
 import type { CSSProperties } from 'react'
 import { DotNumber } from '@/components/play/DotNumber'
 import { StatusBar } from '@/components/play/IosChrome'
-import type { ScreenProps } from '@/components/play/PlayScreen'
 import { geist, geistMono } from '@/components/play/fonts'
 import { cx } from '@/lib/cx'
 import numberDots from './numberDots.json'
@@ -41,8 +40,8 @@ function SeatDot({ seat }: { seat: Seat | { n: number } }) {
   )
 }
 
-/** Pragmatica · Traavel seat map. Hover makes the noise index's dots scatter and gather back into 82. */
-export function TrainSeat({ active }: ScreenProps) {
+/** Pragmatica · Traavel seat map — static, as designed. */
+export function TrainSeat() {
   return (
     <div className={cx(s.screen, geist.variable, geistMono.variable)}>
       {/* eslint-disable @next/next/no-img-element -- static design assets exported from Figma */}
@@ -112,7 +111,7 @@ export function TrainSeat({ active }: ScreenProps) {
         <img src={`${A}/card-glow.svg`} alt="" width={613} height={506.82} className={s.glow} />
         <div className={s.cardTop}>
           <div className={s.noise}>
-            <DotNumber glyph={numberDots['82']} width={106} height={69} assemble={active} />
+            <DotNumber glyph={numberDots['82']} width={106} height={69} />
             <div className={s.noiseLabel}>
               <span>Noise Index</span>
               <span className={s.noiseScale}>/ 100</span>
