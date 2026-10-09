@@ -1,8 +1,3 @@
-import type { CSSProperties } from 'react'
-import type { ScreenProps } from '@/components/play/PlayScreen'
-import { RollSwap } from '@/components/play/RollSwap'
-import { cx } from '@/lib/cx'
-import dots from './dots.json'
 import s from './WeatherList.module.css'
 
 const A = '/play/pragmatica/weather'
@@ -22,18 +17,12 @@ const HOURS = [
   ['15', '20°C'],
 ]
 
-// Heat rises: the lowest dots of the cloud start moving first.
-const minY = Math.min(...dots.map((d) => d.y))
-const maxY = Math.max(...dots.map((d) => d.y))
-const delayOf = (y: number) => (((maxY - y) / (maxY - minY)) * 0.35).toFixed(3)
-
-/** Pragmatica · Weather list. Hover turns a cloudy 17° into a sunny 32°. */
-export function WeatherList({ active }: ScreenProps) {
+/** Pragmatica · Weather list — static, as designed (cloudy 17°). */
+export function WeatherList() {
   return (
-    <div className={cx(s.screen, active && s.hot)}>
+    <div className={s.screen}>
       {/* eslint-disable @next/next/no-img-element -- static design assets exported from Figma */}
-      <img src={`${A}/bg-base.png`} alt="" className={s.bgBase} />
-      <img src={`${A}/bg-cold-overlay.png`} alt="" className={s.bgCold} />
+      <img src={`${A}/bg-cold-overlay.png`} alt="" className={s.bg} />
 
       <div className={s.statusBar} aria-hidden="true">
         <span className={s.time}>10:41</span>
@@ -57,25 +46,10 @@ export function WeatherList({ active }: ScreenProps) {
           <img src={`${A}/icon-calendar.svg`} alt="" width={35} height={34.186} /> 24 июня Суббота
         </p>
         <p className={s.row}>
-          <RollSwap from="17°C" to="32°C" active={active} delay={0.15} />
-          <img src={`${A}/icon-thermometer.svg`} alt="" width={17.94} height={37} />
-          <RollSwap from="42°F" to="57°F" active={active} delay={0.22} />
+          17°C <img src={`${A}/icon-thermometer.svg`} alt="" width={17.94} height={37} /> 42°F
         </p>
         <p className={s.row}>
-          <RollSwap
-            active={active}
-            delay={0.3}
-            from={
-              <>
-                Облачно <img src={`${A}/icon-cloud.svg`} alt="" width={42.354} height={28.048} />
-              </>
-            }
-            to={
-              <>
-                Солнечно <img src={`${A}/icon-sun.svg`} alt="" width={38.652} height={38.672} />
-              </>
-            }
-          />
+          Облачно <img src={`${A}/icon-cloud.svg`} alt="" width={42.354} height={28.048} />
         </p>
       </div>
 
@@ -90,24 +64,7 @@ export function WeatherList({ active }: ScreenProps) {
         ))}
       </ul>
 
-      <svg className={s.dots} viewBox="0 0 393 852" aria-hidden="true">
-        {dots.map((d, i) => (
-          <circle
-            key={i}
-            cx={d.x}
-            cy={d.y}
-            r={d.r}
-            style={
-              {
-                '--dx': `${d.tx - d.x}px`,
-                '--dy': `${d.ty - d.y}px`,
-                '--s': d.r ? d.tr / d.r : 0,
-                '--delay': `${delayOf(d.y)}s`,
-              } as CSSProperties
-            }
-          />
-        ))}
-      </svg>
+      <img src={`${A}/cloud-dots.svg`} alt="" width={226.906} height={142.515} className={s.cloud} />
 
       <ul className={s.hours}>
         {HOURS.map(([hour, temp]) => (

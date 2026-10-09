@@ -1,12 +1,5 @@
 /* Coordinates are the Figma frame's (393 × 852). */
-@property --heat {
-  syntax: '<percentage>';
-  inherits: true;
-  initial-value: 0%;
-}
-
 .screen {
-  --heat: 0%;
   position: relative;
   width: 393px;
   height: 852px;
@@ -14,30 +7,11 @@
   background: #1a1c1e;
   color: #fff;
   font-family: 'Lebowski by Pragmatica', var(--font-ink), sans-serif;
-  transition: --heat 1.3s cubic-bezier(0.45, 0, 0.2, 1);
 }
-
-.hot { --heat: 130%; }
 
 .screen img { display: block; max-width: none; }
 
-.bgBase { position: absolute; left: -25px; top: 0; width: 475px; height: 949px; object-fit: cover; }
-
-/* The cold layer drains away from the bottom up, like rising warm air. */
-.bgCold {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 600px;
-  height: 1200px;
-  object-fit: cover;
-  -webkit-mask-image: linear-gradient(to top, transparent calc(var(--heat) - 30%), #000 var(--heat));
-  mask-image: linear-gradient(to top, transparent calc(var(--heat) - 30%), #000 var(--heat));
-  -webkit-mask-size: 393px 852px;
-  mask-size: 393px 852px;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-}
+.bg { position: absolute; left: 0; top: 0; width: 600px; height: 1200px; object-fit: cover; }
 
 .statusBar {
   position: absolute;
@@ -94,14 +68,7 @@
 .statIcon img { opacity: 0.5; }
 .statValue { font-size: 16px; line-height: normal; opacity: 0.5; white-space: nowrap; }
 
-.dots { position: absolute; inset: 0; width: 393px; height: 852px; overflow: visible; }
-.dots circle {
-  fill: #fff;
-  transform-box: fill-box;
-  transform-origin: center;
-  transition: transform 0.85s cubic-bezier(0.6, 0, 0.2, 1) var(--delay);
-}
-.hot .dots circle { transform: translate(var(--dx), var(--dy)) scale(var(--s)); }
+.cloud { position: absolute; left: 83.98px; top: 464px; }
 
 .hours { position: absolute; left: 20px; top: 691px; display: flex; gap: 20px; margin: 0; padding: 0; list-style: none; }
 .hour {
@@ -125,8 +92,4 @@
   margin-left: -72px;
   border-radius: 100px;
   background: #fff;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .screen, .dots circle { transition: none; }
 }
