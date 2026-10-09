@@ -7,6 +7,7 @@ import type { PlayScreenName } from '@/lib/playScreens'
 import { TrainSearch } from './screens/train/TrainSearch'
 import { TrainSeat } from './screens/train/TrainSeat'
 import { TrainTicket } from './screens/train/TrainTicket'
+import { WbInvite } from './screens/wb/WbInvite'
 import { WbPromo } from './screens/wb/WbPromo'
 import { WeatherDial } from './screens/weather/WeatherDial'
 import { WeatherList } from './screens/weather/WeatherList'
@@ -21,6 +22,7 @@ const SCREENS: Record<PlayScreenName, ComponentType<ScreenProps>> = {
   'train-seat': TrainSeat,
   'train-ticket': TrainTicket,
   'wb-promo': WbPromo,
+  'wb-invite': WbInvite,
 }
 
 /** Designed size of every Pragmatica screen. */
