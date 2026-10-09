@@ -33,8 +33,8 @@
   white-space: nowrap;
   animation: nowIn 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-/* The snowflake sits where Figma puts it relative to the number's box. */
-.snowflake { margin: 26.4px 0 0 -7px; }
+/* Same distance from the digit as in Figma's −3, whatever the digit. */
+.snowflake { margin: 26.4px 0 0 -8px; }
 
 @keyframes nowIn {
   from { opacity: 0; transform: translateY(18%); }

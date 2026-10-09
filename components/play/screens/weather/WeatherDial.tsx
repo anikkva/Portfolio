@@ -8,18 +8,18 @@ import s from './WeatherDial.module.css'
 
 const A = '/play/pragmatica/weather'
 
-/** A realistic winter day in Moscow, °C by hour. */
-const DAY: Record<number, number> = { 8: -6, 9: -6, 10: -5, 11: -4, 12: -3, 13: -2, 14: 0, 15: 1, 16: 2, 17: 1, 18: -1 }
+/** A frosty winter day in Moscow, °C by hour — always below zero, so the minus never jumps. */
+const DAY: Record<number, number> = { 5: -9, 6: -8, 7: -8, 8: -7, 9: -6, 10: -5, 11: -4, 12: -3, 13: -2, 14: -2, 15: -3, 16: -4 }
 const HOURS = Object.keys(DAY).map(Number)
-const START = 12 // the hour under the marker, as in Figma
-const END = 16 // hover scrolls to the warmest hour
+const START = 8 // −7° at rest
+const END = 13 // hover scrolls the morning up to −2°
 
 const tempAt = (hour: number) => {
   const lo = Math.floor(hour)
   const hi = Math.min(lo + 1, HOURS[HOURS.length - 1])
   return DAY[lo] + (DAY[hi] - DAY[lo]) * (hour - lo)
 }
-const formatTemp = (t: number) => (t > 0 ? `+${t}` : `${t}`)
+const formatTemp = (t: number) => `${t}`
 
 /** Piecewise-linear fade by distance from the marker (0, 1, 2, 3 slots away). */
 const fade = (k: number, steps: number[]) => {
@@ -65,13 +65,13 @@ export function WeatherDial({ active }: ScreenProps) {
   const hour = useMotionValue(START)
   const [temp, setTemp] = useState(DAY[START])
   // Warmer hours let a little of the orange base show through the icy layer.
-  const coldOpacity = useTransform(hour, (h) => 1 - Math.min(Math.max((tempAt(h) + 3) / 5, 0), 1) * 0.1)
+  const coldOpacity = useTransform(hour, (h) => 1 - Math.min(Math.max((tempAt(h) + 7) / 5, 0), 1) * 0.1)
 
   useMotionValueEvent(hour, 'change', (h) => setTemp(DAY[Math.round(h)]))
 
   useEffect(() => {
     const controls = active
-      ? animate(hour, END, { duration: 2.6, ease: [0.45, 0, 0.2, 1] })
+      ? animate(hour, END, { duration: 3, ease: [0.45, 0, 0.2, 1] })
       : animate(hour, START, { duration: 1.2, ease: [0.45, 0, 0.2, 1] })
     return () => controls.stop()
   }, [active, hour])
