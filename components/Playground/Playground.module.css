@@ -15,6 +15,15 @@
 .media { width: 100%; height: auto; background: var(--plate); }
 .caption { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; }
 
+/* Coded phone screens: never taller than ~70% of the window, centred in the column;
+   the caption shares the phone's width and is inset past its rounded corners. */
+.screenItem {
+  width: min(100%, calc(70vh * 393 / 852));
+  margin-inline: auto;
+  margin-bottom: 40px;
+}
+.screenItem .caption { margin-top: 14px; padding-inline: 12px; }
+
 .dialog {
   width: 100vw;
   max-width: none;

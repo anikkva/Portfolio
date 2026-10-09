@@ -35,7 +35,14 @@ export function Playground({ items, closeLabel }: { items: Item[]; closeLabel: s
     <>
       <div className={s.masonry}>
         {items.map((item, i) => (
-          <button key={item.id} type="button" className={s.item} onClick={() => setIndex(i)} data-cursor="card" data-cursor-label="OPEN">
+          <button
+            key={item.id}
+            type="button"
+            className={item.screen ? `${s.item} ${s.screenItem}` : s.item}
+            onClick={() => setIndex(i)}
+            data-cursor="card"
+            data-cursor-label="OPEN"
+          >
             {item.screen ? <PlayScreen name={item.screen} /> : <Media src={item.media!} alt={item.caption} className={s.media} />}
             <span className={`ui ${s.caption}`}>
               <span>{item.caption}</span>
