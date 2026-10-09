@@ -1,0 +1,71 @@
+/* Coordinates are the Figma frame's (393 × 852). */
+.screen {
+  position: relative;
+  width: 393px;
+  height: 852px;
+  overflow: hidden;
+  background: #fb890e;
+  color: #fff;
+  font-family: 'Lebowski by Pragmatica', var(--font-ink), sans-serif;
+}
+
+.screen img { display: block; max-width: none; }
+.screen p { margin: 0; }
+
+.bg { position: absolute; left: 0; top: 0; width: 600px; height: 1200px; object-fit: cover; }
+
+.city {
+  position: absolute;
+  left: 21.14px;
+  top: 83.93px;
+  font-size: 42.298px;
+  line-height: 44.06px;
+  white-space: nowrap;
+}
+.cityNext { left: 189px; color: rgba(255, 255, 255, 0.26); }
+
+.now { position: absolute; left: 16px; top: 223px; display: flex; align-items: flex-start; }
+.nowValue {
+  display: block;
+  font-size: 187.246px;
+  line-height: 205.971px;
+  letter-spacing: -6.5536px;
+  white-space: nowrap;
+  animation: nowIn 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+/* The snowflake sits where Figma puts it relative to the number's box. */
+.snowflake { margin: 26.4px 0 0 -7px; }
+
+@keyframes nowIn {
+  from { opacity: 0; transform: translateY(18%); }
+}
+
+.name { position: absolute; left: 20px; top: 438px; display: flex; flex-direction: column; gap: 6px; width: 243.495px; opacity: 0.2; }
+.nameTitle { font-size: 33.85px; line-height: normal; letter-spacing: -1.1848px; }
+.nameHex { font-size: 19.215px; line-height: 26.535px; letter-spacing: -0.8443px; }
+
+.rgb { position: absolute; left: 21px; top: 525px; display: flex; gap: 24px; opacity: 0.2; font-size: 18.615px; line-height: normal; }
+.channel { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+.channelValue { font-family: 'SF Compact Display', -apple-system, system-ui, sans-serif; }
+
+.scaleLabel { position: absolute; font-size: 17.336px; line-height: 33.112px; white-space: nowrap; }
+.tick { position: absolute; height: 1px; margin-top: -0.5px; background: #fff; }
+
+.dial { position: absolute; inset: 0; pointer-events: none; }
+.arc { position: absolute; left: -386.75px; top: 720.6px; width: 1166.191px; height: 356.36px; }
+.marker { position: absolute; left: 184.3px; top: 715.9px; width: 9.934px; height: 13.955px; background: #fff; }
+
+.hour,
+.temp {
+  position: absolute;
+  translate: -50% 0;
+  white-space: nowrap;
+  line-height: 33.112px;
+  will-change: transform, opacity;
+}
+.hour { left: 196.6px; top: 663px; font-size: 17.336px; letter-spacing: 1.4447px; }
+.temp { left: 199.5px; top: 754.8px; font-size: 30.904px; letter-spacing: -1.4447px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nowValue { animation: none; }
+}

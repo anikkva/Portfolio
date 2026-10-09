@@ -1,0 +1,33 @@
+.statusBar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  width: 393px;
+  height: 50px;
+  padding-top: 21px;
+  color: #fff;
+}
+.time {
+  flex: 1 0 0;
+  padding: 0 6px 0 16px;
+  text-align: center;
+  font: 590 17px/22px -apple-system, 'SF Pro Text', system-ui, sans-serif;
+}
+.island { width: 124px; height: 10px; }
+.levels { flex: 1 0 0; display: flex; justify-content: center; align-items: center; gap: 7px; padding: 0 16px 0 6px; }
+.levels img { display: block; }
+
+.homeIndicator {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  z-index: 2;
+  width: 144px;
+  height: 5px;
+  margin-left: -72px;
+  border-radius: 100px;
+  background: #fff;
+}

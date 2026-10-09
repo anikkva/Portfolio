@@ -1,3 +1,4 @@
+import { HomeIndicator, StatusBar } from '@/components/play/IosChrome'
 import s from './WeatherList.module.css'
 
 const A = '/play/pragmatica/weather'
@@ -24,15 +25,7 @@ export function WeatherList() {
       {/* eslint-disable @next/next/no-img-element -- static design assets exported from Figma */}
       <img src={`${A}/bg-cold-overlay.png`} alt="" className={s.bg} />
 
-      <div className={s.statusBar} aria-hidden="true">
-        <span className={s.time}>10:41</span>
-        <span className={s.island} />
-        <span className={s.levels}>
-          <img src={`${A}/status-cellular.svg`} alt="" width={19.2} height={12.226} />
-          <img src={`${A}/status-wifi.svg`} alt="" width={17.142} height={12.328} />
-          <img src={`${A}/status-battery.svg`} alt="" width={27.328} height={13} />
-        </span>
-      </div>
+      <StatusBar time="10:41" />
 
       <span className={s.chevron}>
         <img src={`${A}/sf-chevron-down.svg`} alt="" width={18} height={11} />
@@ -76,7 +69,7 @@ export function WeatherList() {
         ))}
       </ul>
 
-      <span className={s.homeIndicator} aria-hidden="true" />
+      <HomeIndicator />
       {/* eslint-enable @next/next/no-img-element */}
     </div>
   )

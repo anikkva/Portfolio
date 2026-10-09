@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ComponentType } from 'react'
 import { useMediaQuery } from '@/lib/useMediaQuery'
 import { useMotionAllowed } from '@/lib/useMotionAllowed'
 import type { PlayScreenName } from '@/lib/playScreens'
+import { WeatherDial } from './screens/weather/WeatherDial'
 import { WeatherList } from './screens/weather/WeatherList'
 import s from './PlayScreen.module.css'
 
@@ -11,6 +12,7 @@ export type ScreenProps = { active: boolean }
 
 const SCREENS: Record<PlayScreenName, ComponentType<ScreenProps>> = {
   'weather-list': WeatherList,
+  'weather-dial': WeatherDial,
 }
 
 /** Designed size of every Pragmatica screen. */
