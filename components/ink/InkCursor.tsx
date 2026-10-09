@@ -5,14 +5,17 @@ import { useEffect, useState } from 'react'
 import { useMediaQuery } from '@/lib/useMediaQuery'
 import s from './ink.module.css'
 
+/** Stiff, light spring: the dot sticks to the pointer with only a hint of trailing. */
+const FOLLOW = { stiffness: 2000, damping: 40, mass: 0.2 }
+
 export function InkCursor() {
   const fine = useMediaQuery('(pointer: fine)')
   const reduced = useReducedMotion()
   const enabled = fine && !reduced
   const x = useMotionValue(-100)
   const y = useMotionValue(-100)
-  const sx = useSpring(x, { stiffness: 500, damping: 40 })
-  const sy = useSpring(y, { stiffness: 500, damping: 40 })
+  const sx = useSpring(x, FOLLOW)
+  const sy = useSpring(y, FOLLOW)
   const [label, setLabel] = useState<string | null>(null)
 
   useEffect(() => {
