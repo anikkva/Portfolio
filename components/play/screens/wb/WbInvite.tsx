@@ -1,3 +1,7 @@
+'use client'
+
+import { animate, useMotionValue, useMotionValueEvent } from 'motion/react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import { StatusBar } from '@/components/play/IosChrome'
 import type { ScreenProps } from '@/components/play/PlayScreen'
 import { jetbrainsMono, unbounded } from '@/components/play/fonts'
@@ -7,9 +11,9 @@ import s from './WbInvite.module.css'
 const A = '/play/pragmatica/wb'
 
 const FRIENDS = [
-  { name: 'Маша', status: 'позвала · ждём поездку', progress: '0%', avatar: 'avatar-masha.png' },
-  { name: 'Тимур', status: 'поехал · дозревает', progress: '60%', avatar: 'avatar-timur.png', face: true },
-  { name: 'Аня', status: '+20 000 арбузов', avatar: 'avatar-anya.png', ripe: true },
+  { name: 'Маша', status: 'позвала · ждём поездку', progress: 0, avatar: 'avatar-masha.png' },
+  { name: 'Тимур', status: 'поехал · дозревает', progress: 60, avatar: 'avatar-timur.png', face: true },
+  { name: 'Аня', status: '+20 000 арбузов', progress: 100, avatar: 'avatar-anya.png', ripe: true },
 ]
 
 const NAV = [
@@ -19,10 +23,22 @@ const NAV = [
   { label: 'Профиль', icon: 'sf-person.svg', w: 18, h: 19 },
 ]
 
-/** Pragmatica · WB Taxi invite. Hover "copies" the promo code: the icon presses, the code flashes, a toast pops in. */
+/** Counts from 0 up to `to` while active, back to 0 when not. */
+function Percent({ to, active }: { to: number; active: boolean }) {
+  const value = useMotionValue(0)
+  const [shown, setShown] = useState(0)
+  useMotionValueEvent(value, 'change', (v) => setShown(Math.round(v)))
+  useEffect(() => {
+    const controls = animate(value, active ? to : 0, { duration: active ? 1.2 : 0.5, ease: [0.3, 0, 0.2, 1], delay: active ? 0.25 : 0 })
+    return () => controls.stop()
+  }, [active, to, value])
+  return <span className={s.progress}>{shown}%</span>
+}
+
+/** Pragmatica · WB Taxi invite. Hover ripens the friends' rows: fills grow, Timur counts to 60%, Anya's check pops. */
 export function WbInvite({ active }: ScreenProps) {
   return (
-    <div className={cx(s.screen, unbounded.variable, jetbrainsMono.variable, active && s.copied)}>
+    <div className={cx(s.screen, unbounded.variable, jetbrainsMono.variable, active && s.ripening)}>
       {/* eslint-disable @next/next/no-img-element -- static design assets exported from Figma */}
       <StatusBar time="10:41" />
 
@@ -51,10 +67,6 @@ export function WbInvite({ active }: ScreenProps) {
           <div className={s.codeBlock}>
             <div className={s.codeCard}>
               <p className={s.code}>ARBUZ-7K2M</p>
-              <span className={s.toast} aria-hidden={!active}>
-                Скопировано
-                <img src={`${A}/icon-check.svg`} alt="" width={12} height={12} />
-              </span>
               <div className={s.codeActions}>
                 <span className={s.copyIcon} aria-hidden="true">
                   <span className={s.copyBack} />
@@ -76,7 +88,7 @@ export function WbInvite({ active }: ScreenProps) {
           </div>
           <div className={s.rows}>
             {FRIENDS.map((f) => (
-              <div key={f.name} className={cx(s.row, f.ripe && s.rowRipe)}>
+              <div key={f.name} className={cx(s.row, f.ripe && s.rowRipe)} style={{ '--progress': `${f.progress}%` } as CSSProperties}>
                 <div className={s.person}>
                   <span className={s.avatar}>
                     {f.face && <img src={`${A}/watermelon-face.png`} alt="" className={s.avatarFace} />}
@@ -88,9 +100,9 @@ export function WbInvite({ active }: ScreenProps) {
                   </span>
                 </div>
                 {f.ripe ? (
-                  <img src={`${A}/icon-check.svg`} alt="" width={18} height={18} />
+                  <img src={`${A}/icon-check.svg`} alt="" width={18} height={18} className={s.check} />
                 ) : (
-                  <span className={s.progress}>{f.progress}</span>
+                  <Percent to={f.progress} active={active} />
                 )}
               </div>
             ))}
