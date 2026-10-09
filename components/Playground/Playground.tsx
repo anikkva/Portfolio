@@ -2,9 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { Media } from '@/components/Media/Media'
+import { PlayScreen } from '@/components/play/PlayScreen'
+import type { PlayScreenName } from '@/lib/playScreens'
 import s from './Playground.module.css'
 
-type Item = { id: string; media: string; caption: string; year: number }
+type Item = { id: string; media?: string; screen?: PlayScreenName; caption: string; year: number }
 
 export function Playground({ items, closeLabel }: { items: Item[]; closeLabel: string }) {
   const [index, setIndex] = useState<number | null>(null)
@@ -34,7 +36,7 @@ export function Playground({ items, closeLabel }: { items: Item[]; closeLabel: s
       <div className={s.masonry}>
         {items.map((item, i) => (
           <button key={item.id} type="button" className={s.item} onClick={() => setIndex(i)} data-cursor="card" data-cursor-label="OPEN">
-            <Media src={item.media} alt={item.caption} className={s.media} />
+            {item.screen ? <PlayScreen name={item.screen} /> : <Media src={item.media!} alt={item.caption} className={s.media} />}
             <span className={`ui ${s.caption}`}>
               <span>{item.caption}</span>
               <span>{item.year}</span>
@@ -45,7 +47,13 @@ export function Playground({ items, closeLabel }: { items: Item[]; closeLabel: s
       <dialog ref={dialog} className={s.dialog} onClose={() => setIndex(null)} aria-label={current?.caption}>
         {current && index !== null && (
           <div className={s.dialogInner}>
-            <Media src={current.media} alt={current.caption} className={s.dialogMedia} eager />
+            {current.screen ? (
+              <div className={s.dialogScreen}>
+                <PlayScreen name={current.screen} />
+              </div>
+            ) : (
+              <Media src={current.media!} alt={current.caption} className={s.dialogMedia} eager />
+            )}
             <div className={`ui ${s.dialogBar}`}>
               <span>
                 {current.caption} · {current.year}

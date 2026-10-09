@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'Lebowski by Pragmatica';
+  src: url('/fonts/lebowski/LebowskibyPragmatica-Regular.otf') format('opentype');
+  font-display: swap;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 393 / 852;
+  border-radius: calc(44 / 393 * 100%) / calc(44 / 852 * 100%);
+  overflow: hidden;
+  background: #1a1c1e;
+  /* Interpolate auto sizes (e.g. text swaps) where supported. */
+  interpolate-size: allow-keywords;
+}
+
+.canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+}

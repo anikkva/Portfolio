@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { PLAY_SCREENS } from '@/lib/playScreens'
 
 const localized = z.object({ ru: z.string(), en: z.string() })
 const publicPath = z.string().startsWith('/')
@@ -50,8 +51,13 @@ export const cvSchema = z.object({
   education: z.array(z.object({ years: z.string(), place: z.string(), degree: z.string() })),
 })
 
-export const playgroundSchema = z.object({
-  media: publicPath,
-  caption: localized,
-  year: z.number().int(),
-})
+export const playgroundSchema = z
+  .object({
+    media: publicPath.optional(),
+    screen: z.enum(PLAY_SCREENS).optional(),
+    caption: localized,
+    year: z.number().int(),
+  })
+  .refine((item) => (item.media === undefined) !== (item.screen === undefined), {
+    message: 'set exactly one of media or screen',
+  })

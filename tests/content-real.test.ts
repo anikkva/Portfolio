@@ -41,7 +41,8 @@ describe('real content', () => {
       expect(exists(getCv(lang).pdf)).toBe(true)
     }
     const playground = getPlayground()
-    expect(playground).toHaveLength(9)
-    playground.forEach((item) => expect(exists(item.media)).toBe(true))
+    expect(playground.filter((item) => item.media)).toHaveLength(9)
+    expect(playground.filter((item) => item.screen).map((item) => item.screen)).toContain('weather-list')
+    playground.forEach((item) => item.media && expect(exists(item.media)).toBe(true))
   })
 })

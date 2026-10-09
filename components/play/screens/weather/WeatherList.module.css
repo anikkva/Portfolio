@@ -1,0 +1,132 @@
+/* Coordinates are the Figma frame's (393 × 852). */
+@property --heat {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 0%;
+}
+
+.screen {
+  --heat: 0%;
+  position: relative;
+  width: 393px;
+  height: 852px;
+  overflow: hidden;
+  background: #1a1c1e;
+  color: #fff;
+  font-family: 'Lebowski by Pragmatica', var(--font-ink), sans-serif;
+  transition: --heat 1.3s cubic-bezier(0.45, 0, 0.2, 1);
+}
+
+.hot { --heat: 130%; }
+
+.screen img { display: block; max-width: none; }
+
+.bgBase { position: absolute; left: -25px; top: 0; width: 475px; height: 949px; object-fit: cover; }
+
+/* The cold layer drains away from the bottom up, like rising warm air. */
+.bgCold {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 600px;
+  height: 1200px;
+  object-fit: cover;
+  -webkit-mask-image: linear-gradient(to top, transparent calc(var(--heat) - 30%), #000 var(--heat));
+  mask-image: linear-gradient(to top, transparent calc(var(--heat) - 30%), #000 var(--heat));
+  -webkit-mask-size: 393px 852px;
+  mask-size: 393px 852px;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.statusBar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  width: 393px;
+  height: 50px;
+  padding-top: 21px;
+}
+.time {
+  flex: 1 0 0;
+  padding: 0 6px 0 16px;
+  text-align: center;
+  font: 590 17px/22px -apple-system, 'SF Pro Text', system-ui, sans-serif;
+}
+.island { width: 124px; height: 10px; }
+.levels { flex: 1 0 0; display: flex; justify-content: center; align-items: center; gap: 7px; padding: 0 16px 0 6px; }
+
+.chevron {
+  position: absolute;
+  left: 337px;
+  top: 75px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+}
+
+.forecast { position: absolute; left: 20px; top: 67px; width: 322.425px; }
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 40px;
+  line-height: normal;
+  white-space: nowrap;
+}
+.row :global(img) { flex-shrink: 0; }
+
+.stats { position: absolute; left: 32px; top: 296px; display: flex; gap: 45px; margin: 0; padding: 0; list-style: none; }
+.stat { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 48px; }
+.statIcon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+}
+.statIcon img { opacity: 0.5; }
+.statValue { font-size: 16px; line-height: normal; opacity: 0.5; white-space: nowrap; }
+
+.dots { position: absolute; inset: 0; width: 393px; height: 852px; overflow: visible; }
+.dots circle {
+  fill: #fff;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.85s cubic-bezier(0.6, 0, 0.2, 1) var(--delay);
+}
+.hot .dots circle { transform: translate(var(--dx), var(--dy)) scale(var(--s)); }
+
+.hours { position: absolute; left: 20px; top: 691px; display: flex; gap: 20px; margin: 0; padding: 0; list-style: none; }
+.hour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 54px;
+  font-size: 16px;
+  line-height: 33.112px;
+  letter-spacing: 1.4447px;
+  white-space: nowrap;
+}
+
+.homeIndicator {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  width: 144px;
+  height: 5px;
+  margin-left: -72px;
+  border-radius: 100px;
+  background: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen, .dots circle { transition: none; }
+}

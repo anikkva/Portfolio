@@ -28,5 +28,7 @@
 .dialog::backdrop { background: var(--bg); }
 .dialogInner { display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 12px; height: 100%; }
 .dialogMedia { width: 100%; height: 100%; object-fit: contain; }
+/* A coded phone screen keeps its 393:852 ratio and fits the viewer's height. */
+.dialogScreen { justify-self: center; align-self: center; width: min(100%, calc((100dvh - var(--header-h) - 80px) * 393 / 852)); }
 .dialogBar { display: flex; justify-content: space-between; gap: 12px; }
 .close { position: absolute; top: 12px; right: var(--gutter); }
