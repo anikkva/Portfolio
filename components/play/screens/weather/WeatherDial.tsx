@@ -1,7 +1,7 @@
 'use client'
 
-import { animate, motion, useMotionValue, useMotionValueEvent, useTransform, type MotionValue } from 'motion/react'
-import { useEffect, useState } from 'react'
+import { animate, motion, useMotionValue, useTransform, type MotionValue } from 'motion/react'
+import { useEffect } from 'react'
 import { HomeIndicator, StatusBar } from '@/components/play/IosChrome'
 import type { ScreenProps } from '@/components/play/PlayScreen'
 import s from './WeatherDial.module.css'
@@ -14,11 +14,6 @@ const HOURS = Object.keys(DAY).map(Number)
 const START = 8 // −7° at rest
 const END = 13 // hover scrolls the morning up to −2°
 
-const tempAt = (hour: number) => {
-  const lo = Math.floor(hour)
-  const hi = Math.min(lo + 1, HOURS[HOURS.length - 1])
-  return DAY[lo] + (DAY[hi] - DAY[lo]) * (hour - lo)
-}
 const formatTemp = (t: number) => `${t}`
 
 /** Piecewise-linear fade by distance from the marker (0, 1, 2, 3 slots away). */
@@ -60,14 +55,9 @@ function Slot({ hour, offset }: { hour: number; offset: MotionValue<number> }) {
   )
 }
 
-/** Pragmatica · Weather dial. Hover scrolls the day; the big number and the background follow the temperature. */
+/** Pragmatica · Weather dial. Hover scrolls the hours along the arc; the rest of the screen stays still. */
 export function WeatherDial({ active }: ScreenProps) {
   const hour = useMotionValue(START)
-  const [temp, setTemp] = useState(DAY[START])
-  // Warmer hours let a little of the orange base show through the icy layer.
-  const coldOpacity = useTransform(hour, (h) => 1 - Math.min(Math.max((tempAt(h) + 7) / 5, 0), 1) * 0.1)
-
-  useMotionValueEvent(hour, 'change', (h) => setTemp(DAY[Math.round(h)]))
 
   useEffect(() => {
     const controls = active
@@ -79,7 +69,7 @@ export function WeatherDial({ active }: ScreenProps) {
   return (
     <div className={s.screen}>
       {/* eslint-disable @next/next/no-img-element -- static design assets exported from Figma */}
-      <motion.img src={`${A}/bg-cold-overlay.png`} alt="" className={s.bg} style={{ opacity: coldOpacity }} />
+      <img src={`${A}/bg-cold-overlay.png`} alt="" className={s.bg} />
 
       <StatusBar time="18:41" />
 
@@ -87,9 +77,7 @@ export function WeatherDial({ active }: ScreenProps) {
       <p className={`${s.city} ${s.cityNext}`}>Ростов-на-Дону</p>
 
       <div className={s.now}>
-        <span key={temp} className={s.nowValue}>
-          {formatTemp(temp)}
-        </span>
+        <span className={s.nowValue}>{formatTemp(DAY[START])}</span>
         <img src={`${A}/sf-snowflake.svg`} alt="" width={43} height={47} className={s.snowflake} />
       </div>
 

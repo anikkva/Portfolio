@@ -31,14 +31,9 @@
   line-height: 205.971px;
   letter-spacing: -6.5536px;
   white-space: nowrap;
-  animation: nowIn 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 /* Same distance from the digit as in Figma's −3, whatever the digit. */
 .snowflake { margin: 26.4px 0 0 -8px; }
-
-@keyframes nowIn {
-  from { opacity: 0; transform: translateY(18%); }
-}
 
 .name { position: absolute; left: 20px; top: 438px; display: flex; flex-direction: column; gap: 6px; width: 243.495px; opacity: 0.2; }
 .nameTitle { font-size: 33.85px; line-height: normal; letter-spacing: -1.1848px; }
@@ -65,7 +60,3 @@
 }
 .hour { left: 196.6px; top: 663px; font-size: 17.336px; letter-spacing: 1.4447px; }
 .temp { left: 199.5px; top: 754.8px; font-size: 30.904px; letter-spacing: -1.4447px; }
-
-@media (prefers-reduced-motion: reduce) {
-  .nowValue { animation: none; }
-}
