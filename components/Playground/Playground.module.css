@@ -22,6 +22,8 @@
   grid-template-columns: 1fr;
   gap: 48px 24px;
   align-items: start;
+  /* Extra air under the page title (on top of its 40px). */
+  padding-top: clamp(24px, 4vw, 56px);
   margin-bottom: 96px;
 }
 @media (min-width: 640px) {
