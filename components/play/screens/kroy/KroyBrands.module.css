@@ -1,0 +1,6 @@
+.field { position: absolute; left: 20px; right: 20px; top: 290px; }
+.list { position: absolute; left: 20px; right: 20px; top: 350px; margin: 0; padding: 0; list-style: none; }
+.row { display: flex; align-items: center; justify-content: space-between; height: 52px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.heart { display: grid; color: #b4b4b4; }
+.liked { color: var(--ink); }
+.fade { position: absolute; left: 0; right: 0; bottom: 0; height: 180px; background: linear-gradient(rgba(255, 255, 255, 0), #fff 55%); }

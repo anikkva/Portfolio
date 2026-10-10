@@ -1,0 +1,26 @@
+.wordmark {
+  position: absolute;
+  left: 14px;
+  top: 96px;
+  font: 600 150px/0.9 var(--wordmark);
+  letter-spacing: 0.01em;
+}
+.rule { position: absolute; left: 20px; right: 20px; top: 256px; height: 1px; background: var(--ink); }
+.tagline { position: absolute; left: 20px; right: 40px; top: 278px; font-size: 30px; line-height: 1.1; letter-spacing: -0.02em; }
+.tagline em { font: italic 400 33px/1 var(--serif); }
+.features {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 420px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+}
+.features li { display: grid; gap: 4px; padding-top: 10px; border-top: 1px solid var(--line); }
+.features span { color: var(--muted); font-variant-numeric: tabular-nums; }
+.cta { bottom: 96px; }
+.login { position: absolute; left: 0; right: 0; bottom: 60px; text-align: center; font-size: 14px; color: var(--muted); }

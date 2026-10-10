@@ -79,12 +79,6 @@ const frontmatter = (obj) =>
 const COVER_SIZE = { S: [800, 1000], M: [1200, 900], L: [1600, 1000] }
 
 const PROJECTS = [
-  { slug: 'market-checkout', type: 'case', size: 'L', year: 2025, order: 1,
-    title: { ru: 'Маркетплейс. Корзина и оплата', en: 'Marketplace. Checkout redesign' },
-    role: { ru: 'Lead Product Designer', en: 'Lead Product Designer' },
-    team: { ru: '6 человек', en: '6 people' }, duration: { ru: '4 месяца', en: '4 months' },
-    tags: ['mobile', 'e-commerce'],
-    task: { ru: 'Пользователи бросали корзину на шаге оплаты: путь занимал пять экранов, а стоимость доставки появлялась только в самом конце.', en: 'People abandoned the cart at payment: checkout took five screens and the delivery cost showed up only at the very end.' } },
   { slug: 'bank-onboarding', type: 'case', size: 'M', year: 2024, order: 2,
     title: { ru: 'Банк. Онбординг за 3 минуты', en: 'Bank. 3-minute onboarding' },
     role: { ru: 'Senior Product Designer', en: 'Senior Product Designer' },

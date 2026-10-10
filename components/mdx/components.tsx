@@ -1,6 +1,8 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { InkReveal } from '@/components/ink/InkReveal'
 import { Media } from '@/components/Media/Media'
+import { PlayScreen } from '@/components/play/PlayScreen'
+import type { PlayScreenName } from '@/lib/playScreens'
 import { BeforeAfter } from './BeforeAfter'
 import s from './mdx.module.css'
 
@@ -47,4 +49,18 @@ function Stats({ items }: { items: { value: string; label: string }[] }) {
   )
 }
 
-export const mdxComponents = { Media: Figure, Video: Figure, MediaGrid, BeforeAfter, Quote, Stats }
+/** A row of coded phone screens on a grey plate; each one plays its micro-animation on hover. */
+function Screens({ names, caption }: { names: PlayScreenName[]; caption?: string }) {
+  return (
+    <figure className={s.screensFigure}>
+      <div className={s.screens} style={{ '--cols': names.length } as CSSProperties}>
+        {names.map((name) => (
+          <PlayScreen key={name} name={name} />
+        ))}
+      </div>
+      {caption && <figcaption className={`ui ${s.caption}`}>{caption}</figcaption>}
+    </figure>
+  )
+}
+
+export const mdxComponents = { Media: Figure, Video: Figure, MediaGrid, BeforeAfter, Quote, Stats, Screens }

@@ -9,3 +9,6 @@ node_modules/
 next-env.d.ts
 *.tsbuildinfo
 .playwright-mcp/
+
+# Third-party design references — never commit or publish
+/refs/

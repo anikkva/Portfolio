@@ -1,0 +1,59 @@
+/* Крой — own wardrobe concept. Black and white, square corners everywhere, Inter text with
+   Playfair italic accents and an Oswald wordmark. Layout is absolute on a 393 × 852 frame. */
+.screen {
+  --ink: #0a0a0a;
+  --muted: #6b6b6b;
+  --plate: #f1f1f1;
+  --line: #e2e2e2;
+  --sans: var(--font-inter), system-ui, sans-serif;
+  --serif: var(--font-playfair), Georgia, serif;
+  --wordmark: var(--font-oswald), 'Arial Narrow', sans-serif;
+  position: relative;
+  width: 393px;
+  height: 852px;
+  overflow: hidden;
+  background: #fff;
+  color: var(--ink);
+  font: 400 15px/1.35 var(--sans);
+}
+.screen p { margin: 0; }
+
+/* Top bar: back, step counter and a hairline progress. */
+.top { position: absolute; left: 20px; right: 20px; top: 62px; display: flex; align-items: center; justify-content: space-between; height: 24px; }
+.step { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.progress { position: absolute; left: 20px; right: 20px; top: 98px; height: 2px; background: var(--line); }
+.progress span { display: block; height: 100%; background: var(--ink); }
+
+.head { position: absolute; left: 20px; right: 20px; top: 150px; }
+.title { font-size: 34px; line-height: 1.08; letter-spacing: -0.02em; }
+.title em { font: italic 400 37px/1 var(--serif); letter-spacing: -0.01em; }
+.lead { margin-top: 12px; font-size: 14px; color: var(--muted); }
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 14px;
+  border-radius: 0;
+  background: var(--plate);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.cta {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  border-radius: 0;
+  background: var(--ink);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+}
+.ctaMuted { background: var(--plate); color: var(--muted); }

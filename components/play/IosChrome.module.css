@@ -19,6 +19,8 @@
 .island { width: 124px; height: 10px; }
 .levels { flex: 1 0 0; display: flex; justify-content: center; align-items: center; gap: 7px; padding: 0 16px 0 6px; }
 .levels img { display: block; }
+.statusBar.dark { color: #000; }
+.dark .levels img { filter: brightness(0); }
 
 .homeIndicator {
   position: absolute;
@@ -31,3 +33,5 @@
   border-radius: 100px;
   background: #fff;
 }
+
+.homeIndicator.dark { background: #000; }

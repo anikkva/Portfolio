@@ -30,3 +30,9 @@
 .baLabel { position: absolute; top: 12px; padding: 6px 10px; border-radius: 999px; background: var(--bg); pointer-events: none; }
 .baLeft { left: 12px; }
 .baRight { right: 12px; }
+
+.screensFigure { margin: 48px 0; }
+.screens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: clamp(16px, 4vw, 48px); background: var(--plate); }
+@media (min-width: 768px) {
+  .screens { grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); }
+}

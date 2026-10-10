@@ -2,10 +2,10 @@ import s from './IosChrome.module.css'
 
 const A = '/play/pragmatica/ios'
 
-/** iPhone status bar as drawn in the Figma frames (393 px wide). */
-export function StatusBar({ time }: { time: string }) {
+/** iPhone status bar as drawn in the Figma frames (393 px wide). `dark` is for light screens. */
+export function StatusBar({ time, dark = false }: { time: string; dark?: boolean }) {
   return (
-    <div className={s.statusBar} aria-hidden="true">
+    <div className={dark ? `${s.statusBar} ${s.dark}` : s.statusBar} aria-hidden="true">
       <span className={s.time}>{time}</span>
       <span className={s.island} />
       <span className={s.levels}>
@@ -19,6 +19,6 @@ export function StatusBar({ time }: { time: string }) {
   )
 }
 
-export function HomeIndicator() {
-  return <span className={s.homeIndicator} aria-hidden="true" />
+export function HomeIndicator({ dark = false }: { dark?: boolean }) {
+  return <span className={dark ? `${s.homeIndicator} ${s.dark}` : s.homeIndicator} aria-hidden="true" />
 }

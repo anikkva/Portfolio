@@ -1,0 +1,4 @@
+.field { position: absolute; left: 20px; right: 20px; top: 290px; }
+.chips { position: absolute; left: 20px; right: 20px; top: 358px; display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { padding: 10px 14px; border: 1px solid var(--line); border-radius: 0; font-size: 14px; }
+.on { border-color: var(--ink); background: var(--ink); color: #fff; }

@@ -5,6 +5,10 @@ import { useMediaQuery } from '@/lib/useMediaQuery'
 import { useMotionAllowed } from '@/lib/useMotionAllowed'
 import type { PlayScreenName } from '@/lib/playScreens'
 import { DatingProfile } from './screens/dating/DatingProfile'
+import { KroyBrands } from './screens/kroy/KroyBrands'
+import { KroyWear } from './screens/kroy/KroyWear'
+import { KroyWelcome } from './screens/kroy/KroyWelcome'
+import { KroyWork } from './screens/kroy/KroyWork'
 import { TrainSearch } from './screens/train/TrainSearch'
 import { TrainSeat } from './screens/train/TrainSeat'
 import { TrainTicket } from './screens/train/TrainTicket'
@@ -25,6 +29,10 @@ const SCREENS: Record<PlayScreenName, ComponentType<ScreenProps>> = {
   'wb-promo': WbPromo,
   'wb-invite': WbInvite,
   'dating-profile': DatingProfile,
+  'kroy-welcome': KroyWelcome,
+  'kroy-work': KroyWork,
+  'kroy-wear': KroyWear,
+  'kroy-brands': KroyBrands,
 }
 
 /** Designed size of every Pragmatica screen. */
