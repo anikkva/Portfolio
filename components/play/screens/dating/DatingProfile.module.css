@@ -1,0 +1,125 @@
+@font-face {
+  font-family: 'RT Obligat';
+  src: url('/fonts/rt-obligat/RTObligat-FREE.otf') format('opentype');
+  font-display: swap;
+}
+
+/* Coordinates are the Figma frame's (393 × 852); sheet children use the sheet's own space. */
+.screen {
+  --ease: cubic-bezier(0.45, 0, 0.2, 1);
+  position: relative;
+  width: 393px;
+  height: 852px;
+  overflow: hidden;
+  background: #f0f0f0;
+  color: #221e1e;
+  font-family: 'RT Obligat', sans-serif;
+  line-height: normal;
+}
+.screen img { display: block; max-width: none; }
+
+.page { position: absolute; inset: 0; }
+
+.photo { position: absolute; left: 0; top: 0; width: 393px; height: 393px; object-fit: cover; }
+.photoMirror { top: 393px; transform: scaleY(-1); }
+
+.roundButton {
+  position: absolute;
+  top: 62.5px;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 64.711px;
+  background: rgba(0, 0, 0, 0.25);
+}
+.message { left: 19.5px; }
+.shuffle { left: 324.5px; }
+/* The outlined title is a bit larger than its text box (the stroke sits outside). */
+.title { position: absolute; left: 130px; top: 62.5px; }
+
+.friends { position: absolute; left: 325px; top: 130px; width: 52px; height: 52px; }
+.card {
+  position: relative;
+  display: block;
+  width: 28.6px;
+  height: 36.4px;
+  overflow: hidden;
+  border: 1.213px solid #fff;
+  border-radius: 6.933px;
+  background: red;
+}
+.cardA { position: absolute; left: 18.2px; top: 11.27px; display: grid; place-items: center; width: 37.046px; height: 42.562px; }
+.cardA > .card { rotate: 15deg; }
+.cardB { position: absolute; left: -3.47px; top: 0; display: grid; place-items: center; width: 33.164px; height: 39.864px; }
+.cardB > .card { rotate: -7.6deg; }
+.cardC { position: absolute; left: 10.4px; top: 8.67px; }
+.cardImageA { position: absolute; left: -8.29px; top: -0.21px; width: 53.399px; height: 35.767px; object-fit: fill; }
+.cardImageB { position: absolute; left: -11.38px; top: -4.65px; width: 49.846px; height: 42.793px; object-fit: cover; }
+.cardImageC { position: absolute; left: -11.62px; top: -0.35px; width: 43.622px; height: 65.433px; object-fit: cover; }
+
+.sheet { position: absolute; left: 0; top: 395px; width: 393px; height: 618px; overflow: hidden; border-radius: 32px 32px 0 0; background: #fff; }
+
+.reactionsHeader { position: absolute; left: 18px; top: 18px; display: flex; align-items: center; justify-content: space-between; width: 354px; }
+.reactions { position: absolute; left: 10px; top: 63px; display: flex; align-items: flex-start; gap: 8.268px; }
+.reaction { position: relative; flex-shrink: 0; overflow: hidden; }
+.reaction img { position: absolute; }
+.badges { position: absolute; left: 37px; top: 39px; display: flex; gap: 55px; }
+.badge {
+  display: grid;
+  place-items: center;
+  width: 22.049px;
+  height: 22.049px;
+  border-radius: 52.498px;
+  background: #000;
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: -0.52px;
+}
+
+.vibeHeading { position: absolute; left: 22px; top: 157.5px; }
+
+.place { position: absolute; }
+.placeCenter { position: absolute; display: grid; place-items: center; }
+
+.folder { position: relative; display: block; overflow: hidden; }
+.folder img { position: absolute; width: 333.33%; height: 379.89%; }
+
+.label { color: #221e1e; font-size: 12px; text-transform: uppercase; white-space: nowrap; }
+
+.doodle { display: block; overflow: visible; }
+.doodle path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+/* Hover: each stroke vanishes and redraws, in order. */
+.active .doodle path { animation: draw 0.7s var(--ease) var(--draw-delay) backwards; }
+@keyframes draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Bottom haze over the lower folders (sheet top 395 + 618 − 160 − 343 = 510). */
+.fade {
+  position: absolute;
+  left: calc(50% + 1px);
+  top: 510px;
+  width: 559px;
+  height: 343px;
+  translate: -50% 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 45.87%, #f1f1f0 95.608%);
+  pointer-events: none;
+}
+
+/* Like / dislike. */
+.actions { position: absolute; left: 50%; top: 743px; display: flex; gap: 8px; translate: calc(-50% + 0.5px) 0; }
+.dislike {
+  display: grid;
+  place-items: center;
+  width: 125px;
+  height: 80px;
+  border-radius: 100px 16px 16px 100px;
+  background: #fff;
+  filter: drop-shadow(0 4px 43.05px rgba(0, 0, 0, 0.25));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .active .doodle path { animation: none; }
+}

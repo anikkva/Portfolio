@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ComponentType } from 'react'
 import { useMediaQuery } from '@/lib/useMediaQuery'
 import { useMotionAllowed } from '@/lib/useMotionAllowed'
 import type { PlayScreenName } from '@/lib/playScreens'
+import { DatingProfile } from './screens/dating/DatingProfile'
 import { TrainSearch } from './screens/train/TrainSearch'
 import { TrainSeat } from './screens/train/TrainSeat'
 import { TrainTicket } from './screens/train/TrainTicket'
@@ -23,6 +24,7 @@ const SCREENS: Record<PlayScreenName, ComponentType<ScreenProps>> = {
   'train-ticket': TrainTicket,
   'wb-promo': WbPromo,
   'wb-invite': WbInvite,
+  'dating-profile': DatingProfile,
 }
 
 /** Designed size of every Pragmatica screen. */
