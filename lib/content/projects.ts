@@ -32,13 +32,14 @@ export function getProjects(lang: Locale, root = CONTENT_ROOT): Project[] {
     .readdirSync(dir, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .map((entry) => loadProject(path.join(dir, entry.name), entry.name, lang))
-    .filter((p): p is Project => p !== undefined)
+    .filter((p): p is Project => p !== undefined && !p.draft)
     .sort((a, b) => a.order - b.order)
 }
 
 export function getProject(slug: string, lang: Locale, root = CONTENT_ROOT): Project | undefined {
   const dir = path.join(root, 'projects', slug)
-  return fs.existsSync(dir) ? loadProject(dir, slug, lang) : undefined
+  const project = fs.existsSync(dir) ? loadProject(dir, slug, lang) : undefined
+  return project?.draft ? undefined : project
 }
 
 export function getNextProject(slug: string, lang: Locale, root = CONTENT_ROOT): Project | undefined {

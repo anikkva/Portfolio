@@ -18,6 +18,8 @@ export const projectSchema = z
     size: z.enum(['S', 'M', 'L']).default('M'),
     order: z.number(),
     featured: z.boolean().default(true),
+    /** Work in progress: kept in the repo, hidden from the site. */
+    draft: z.boolean().default(false),
   })
   .refine((p) => p.type !== 'link' || p.externalUrl !== undefined, {
     message: 'externalUrl is required for type: link',
