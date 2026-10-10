@@ -8,7 +8,10 @@ import s from './Playground.module.css'
 
 type Item = { id: string; media?: string; screen?: PlayScreenName; caption: string; year: number }
 
-export function Playground({ items, closeLabel }: { items: Item[]; closeLabel: string }) {
+export function Playground({ items: input, closeLabel }: { items: Item[]; closeLabel: string }) {
+  // Coded screens lead the page; the viewer's ←/→ follows the same order.
+  const items = [...input.filter((item) => item.screen), ...input.filter((item) => !item.screen)]
+  const screenCount = items.filter((item) => item.screen).length
   const [index, setIndex] = useState<number | null>(null)
   const dialog = useRef<HTMLDialogElement>(null)
 
@@ -31,26 +34,27 @@ export function Playground({ items, closeLabel }: { items: Item[]; closeLabel: s
 
   const current = index === null ? null : items[index]
 
+  const renderItem = (item: Item, i: number) => (
+    <button
+      key={item.id}
+      type="button"
+      className={item.screen ? `${s.item} ${s.screenItem}` : s.item}
+      onClick={() => setIndex(i)}
+      data-cursor="card"
+      data-cursor-label="OPEN"
+    >
+      {item.screen ? <PlayScreen name={item.screen} /> : <Media src={item.media!} alt={item.caption} className={s.media} />}
+      <span className={`ui ${s.caption}`}>
+        <span>{item.caption}</span>
+        <span>{item.year}</span>
+      </span>
+    </button>
+  )
+
   return (
     <>
-      <div className={s.masonry}>
-        {items.map((item, i) => (
-          <button
-            key={item.id}
-            type="button"
-            className={item.screen ? `${s.item} ${s.screenItem}` : s.item}
-            onClick={() => setIndex(i)}
-            data-cursor="card"
-            data-cursor-label="OPEN"
-          >
-            {item.screen ? <PlayScreen name={item.screen} /> : <Media src={item.media!} alt={item.caption} className={s.media} />}
-            <span className={`ui ${s.caption}`}>
-              <span>{item.caption}</span>
-              <span>{item.year}</span>
-            </span>
-          </button>
-        ))}
-      </div>
+      <div className={s.screens}>{items.slice(0, screenCount).map((item, i) => renderItem(item, i))}</div>
+      <div className={s.masonry}>{items.slice(screenCount).map((item, i) => renderItem(item, screenCount + i))}</div>
       <dialog ref={dialog} className={s.dialog} onClose={() => setIndex(null)} aria-label={current?.caption}>
         {current && index !== null && (
           <div className={s.dialogInner}>

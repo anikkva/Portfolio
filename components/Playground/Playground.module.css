@@ -15,12 +15,25 @@
 .media { width: 100%; height: auto; background: var(--plate); }
 .caption { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; }
 
-/* Coded phone screens: never taller than ~70% of the window, centred in the column;
-   the caption shares the phone's width and is inset past its rounded corners. */
+/* Coded phone screens on top: 1 / 2 / 4 per row; every second phone steps down for rhythm.
+   A phone is never taller than ~70% of the window and the caption is inset past its rounded corners. */
+.screens {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px 24px;
+  align-items: start;
+  margin-bottom: 96px;
+}
+@media (min-width: 640px) {
+  .screens { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .screens > :nth-child(even) { margin-top: 72px; }
+}
+@media (min-width: 1024px) {
+  .screens { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 64px; }
+}
 .screenItem {
   width: min(100%, calc(70vh * 393 / 852));
-  margin-inline: auto;
-  margin-bottom: 40px;
+  margin: 0 auto;
 }
 .screenItem .caption { margin-top: 14px; padding-inline: 12px; }
 
