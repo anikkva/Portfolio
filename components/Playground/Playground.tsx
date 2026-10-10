@@ -43,7 +43,11 @@ export function Playground({ items: input, closeLabel }: { items: Item[]; closeL
       data-cursor="card"
       data-cursor-label="OPEN"
     >
-      {item.screen ? <PlayScreen name={item.screen} /> : <Media src={item.media!} alt={item.caption} className={s.media} />}
+      {item.screen ? (
+        <div className={s.phone}>
+          <PlayScreen name={item.screen} />
+        </div>
+      ) :<Media src={item.media!} alt={item.caption} className={s.media} />}
       <span className={`ui ${s.caption}`}>
         <span>{item.caption}</span>
         <span>{item.year}</span>

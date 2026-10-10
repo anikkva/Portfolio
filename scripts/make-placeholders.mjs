@@ -263,15 +263,3 @@ for (const lang of ['ru', 'en']) {
   writeOnce(`content/cv.${lang}.mdx`, frontmatter({ title, pdf: '/cv/anikkva-cv.pdf', experience, education }) + '\n' + body + '\n')
 }
 
-const PLAY = [
-  ['Чернильный курсор', 'Ink cursor', 800, 1000], ['Микро-анимация лайка', 'Like micro-animation', 800, 800],
-  ['Онбординг-иллюстрации', 'Onboarding illustrations', 1200, 900], ['Генеративные обложки', 'Generative covers', 800, 1100],
-  ['Типографический плакат', 'Type poster', 900, 1200], ['Виджеты iOS', 'iOS widgets', 1200, 800],
-  ['Иконки 24px', '24px icons', 800, 800], ['Лендинг-эксперимент', 'Landing experiment', 1200, 1000],
-  ['3D-кнопка', '3D button', 800, 1000],
-]
-PLAY.forEach(([ru, en, w, h], i) => {
-  const id = String(i + 1).padStart(2, '0')
-  writeOnce(`public/playground/${id}.svg`, blobSvg(300 + i, w, h))
-  writeOnce(`content/playground/${id}.json`, JSON.stringify({ media: `/playground/${id}.svg`, caption: { ru, en }, year: 2025 - (i % 3) }, null, 2) + '\n')
-})

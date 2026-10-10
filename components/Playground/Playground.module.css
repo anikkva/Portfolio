@@ -15,7 +15,7 @@
 .media { width: 100%; height: auto; background: var(--plate); }
 .caption { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; }
 
-/* Coded phone screens on top: 1 / 2 / 4 per row; every second phone steps down for rhythm.
+/* Coded phone screens on top: 1 / 2 / 4 per row, tops on one line.
    A phone is never taller than ~70% of the window and the caption is inset past its rounded corners. */
 .screens {
   display: grid;
@@ -26,7 +26,6 @@
 }
 @media (min-width: 640px) {
   .screens { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .screens > :nth-child(even) { margin-top: 72px; }
 }
 @media (min-width: 1024px) {
   .screens { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 64px; }
@@ -36,6 +35,12 @@
   margin: 0 auto;
 }
 .screenItem .caption { margin-top: 14px; padding-inline: 12px; }
+/* Hover lifts the phone a touch; the caption stays put. */
+.phone { transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .screenItem:hover .phone,
+  .screenItem:focus-visible .phone { transform: scale(1.04); }
+}
 
 .dialog {
   width: 100vw;
